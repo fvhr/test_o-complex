@@ -54,5 +54,7 @@ MYSQL_PORT=
 make mig
 # Загрузка городов
 make load
+# Загрузка русского языка
+make loc-c
 # Запуск сервера
 make run
