@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block main %}
+    <body>
+
+    <div class="container mt-4">
+        <!-- Search Box -->
+        <div class="autocomplete-container mb-4">
+            <input id="searchBox" type="text" class="form-control" placeholder="Найти город...">
+            <div id="autocomplete-list" class="autocomplete-items"></div>
+        </div>
+
+        <h2>{% translate 'Selected Cities' %}</h2>
+        <ul class="list-unstyled city-list">
+            {% for city in cities_user %}
+            <li><a href="{% url 'geo:geo-detail' city.pk %}">{{ city.name }}</a></li>
+            {% endfor %}
+        </ul>
+
+        <h1 class="mb-4">{% translate 'Weather Forecast for city: ' %} {{ city }}</h1>
+
+        <div class="row">
+            {% for day in ten_day_forecast %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title date-format" data-date="{{ day.date }}"></h5>
+                        <p class="card-text">{% translate 'Sunrise:' %} {{ day.sunrise }}</p>
+                        <p class="card-text">{% translate 'Sunset:' %} {{ day.sunset }}</p>
+                        <div class="row">
+                            <div class="col-6">
+                                <p class="card-text">{% translate 'Morning:' %}</p>
+                                <p class="card-text">{% translate 'Cloudiness:' %} {% widthratio day.parts.morning.cloudness 1 100 %}%</p>
+                                <p class="card-text">{% translate 'Temperature:' %} {{ day.parts.morning.temp_avg }}°C</p>
+                                <p class="card-text">{% translate 'Wind:' %} {{ day.parts.morning.wind_speed }} m/s</p>
+                                <p class="card-text">{% translate 'Humidity:' %} {{ day.parts.morning.humidity }}%</p>
+                            </div>
+                            <div class="col-6">
+                                <p class="card-text">{% translate 'Day:' %}</p>
+                                <p class="card-text">{% translate 'Cloudiness:' %} {% widthratio day.parts.morning.cloudness 1 100 %}%</p>
+                                <p class="card-text">{% translate 'Temperature:' %} {{ day.parts.morning.temp_avg }}°C</p>
+                                <p class="card-text">{% translate 'Wind:' %} {{ day.parts.morning.wind_speed }} m/s</p>
+                                <p class="card-text">{% translate 'Humidity:' %} {{ day.parts.morning.humidity }}%</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <p class="card-text">{% translate 'Evening:' %}</p>
+                                <p class="card-text">{% translate 'Cloudiness:' %} {% widthratio day.parts.morning.cloudness 1 100 %}%</p>
+                                <p class="card-text">{% translate 'Temperature:' %} {{ day.parts.morning.temp_avg }}°C</p>
+                                <p class="card-text">{% translate 'Wind:' %} {{ day.parts.morning.wind_speed }} m/s</p>
+                                <p class="card-text">{% translate 'Humidity:' %} {{ day.parts.morning.humidity }}%</p>
+                            </div>
+                            <div class="col-6">
+                                <p class="card-text">{% translate 'Night:' %}</p>
+                                <p class="card-text">{% translate 'Cloudiness:' %} {% widthratio day.parts.morning.cloudness 1 100 %}%</p>
+                                <p class="card-text">{% translate 'Temperature:' %} {{ day.parts.morning.temp_avg }}°C</p>
+                                <p class="card-text">{% translate 'Wind:' %} {{ day.parts.morning.wind_speed }} m/s</p>
+                                <p class="card-text">{% translate 'Humidity:' %} {{ day.parts.morning.humidity }}%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    </body>
+{% endblock main %}
