@@ -23,9 +23,13 @@ urlpatterns = [
     ),
     django.urls.path('api/v1/', django.urls.include(router.urls)),
     django.urls.path(
-        'api/v1/found_city/', CitySearchView.as_view(), name='city-search',
+        'api/v1/found_city/',
+        CitySearchView.as_view(),
+        name='city-search',
     ),
     django.urls.path(
-        'api/v1/count_cities/', CityCountView.as_view(), name='city-count',
+        'api/v1/count_cities/',
+        CityCountView.as_view(),
+        name='city-count',
     ),
 ]

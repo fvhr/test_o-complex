@@ -96,7 +96,8 @@ class GeoView(django.views.generic.TemplateView):
         except APIRequestException:
             city = geo.models.City.objects.get(name='Москва')
             seven_day_forecast = get_weather_by_lat_lot(
-                city.latitude, city.longitude,
+                city.latitude,
+                city.longitude,
             )
 
         context['city'] = city
@@ -126,7 +127,8 @@ class GeoDetailView(django.views.generic.DetailView):
         city.save()
 
         seven_day_forecast = get_weather_by_lat_lot(
-            city.latitude, city.longitude,
+            city.latitude,
+            city.longitude,
         )
         selected_cities = update_get_selected_cities(self.request, city)
         selected_cities_list = selected_cities.split(',')

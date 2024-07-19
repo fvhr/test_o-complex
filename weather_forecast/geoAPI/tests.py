@@ -11,7 +11,6 @@ from geoAPI.serializers import (
 
 
 class CityAPITestCase(APITestCase):
-
     def setUp(self):
         # Создание тестовых данных
         self.city1 = City.objects.create(
@@ -54,7 +53,8 @@ class CityAPITestCase(APITestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(
-            response.data, {'error': 'Query parameter is required'},
+            response.data,
+            {'error': 'Query parameter is required'},
         )
 
     def test_city_count(self):

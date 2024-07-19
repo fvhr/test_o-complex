@@ -16,7 +16,6 @@ from geo.views import (
 
 
 class GetLatLonByIpTest(TestCase):
-
     @patch('geo.views.requests.post')
     def test_get_lat_lon_by_ip_success(self, mock_post):
         mock_post.return_value.status_code = 200
@@ -35,7 +34,6 @@ class GetLatLonByIpTest(TestCase):
 
 
 class GetCityByLatLonTest(TestCase):
-
     @patch('geo.views.requests.get')
     def test_get_city_by_lat_lon_success(self, mock_get):
         mock_get.return_value.status_code = 200
@@ -74,7 +72,6 @@ class GetCityByLatLonTest(TestCase):
 
 
 class GetWeatherByLatLonTest(TestCase):
-
     @patch('geo.views.requests.get')
     def test_get_weather_by_lat_lon_success(self, mock_get):
         mock_get.return_value.status_code = 200
@@ -95,7 +92,6 @@ class GetWeatherByLatLonTest(TestCase):
 
 
 class GeoViewTest(TestCase):
-
     @patch('geo.views.get_lat_lon_by_ip')
     @patch('geo.views.get_city_by_lat_lon')
     @patch('geo.views.get_weather_by_lat_lot')
@@ -116,7 +112,6 @@ class GeoViewTest(TestCase):
 
 
 class GeoDetailViewTest(TestCase):
-
     @patch('geo.views.get_weather_by_lat_lot')
     def test_geo_detail_view_success(self, mock_weather):
         mock_weather.return_value = [
@@ -124,7 +119,9 @@ class GeoDetailViewTest(TestCase):
         ]
 
         city = City.objects.create(
-            name='Moscow', latitude=55.7558, longitude=37.6176,
+            name='Moscow',
+            latitude=55.7558,
+            longitude=37.6176,
         )
 
         client = Client()
@@ -138,10 +135,11 @@ class GeoDetailViewTest(TestCase):
 
 
 class SelectedCitiesCookieTest(TestCase):
-
     def test_update_selected_cities_cookie(self):
         city = City.objects.create(
-            name='Moscow', latitude=55.7558, longitude=37.6176,
+            name='Moscow',
+            latitude=55.7558,
+            longitude=37.6176,
         )
         client = Client()
         response = client.get(reverse('geo:geo-detail', args=[city.id]))
