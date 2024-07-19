@@ -12,6 +12,8 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS')
 if ALLOWED_HOSTS is None:
     ALLOWED_HOSTS = ['*']
+else:
+    ALLOWED_HOSTS = ALLOWED_HOSTS.split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
